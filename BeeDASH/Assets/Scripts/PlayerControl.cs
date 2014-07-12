@@ -3,15 +3,18 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-    public int m_hp;
+    public int m_hp ;
 
-    private int UpCount;
-    private int DownCount;
+    private static int UpCount  ;
+    private static int DownCount;
+    private static Vector3 position;
 
 	// Use this for initialization
 	void Start () {
         QualitySettings.vSyncCount = 0; // VSyncをOFFにする
         Application.targetFrameRate = 60; // ターゲットフレームレートを60に設定
+        UpCount = 0;
+        DownCount = 0;
         m_hp = 3;
 	}
 	
@@ -21,21 +24,41 @@ public class PlayerControl : MonoBehaviour {
         float speedf = 1.0f / 60.0f;
         Vector3 speed = new Vector3(speedf, 0.0f, 0.0f);
 
-        foreach (var touch in Input.touches)
+        position = transform.position;
+
+        //foreach (var touch in Input.touches)
+        //{
+
+        //    if (touch.phase == TouchPhase.Began)
+        //    {
+        //        // 現在のタッチ位置からRaycast
+        //        if( touch.position.x <= Screen.height/2 )
+        //        {
+        //            UpCount = 300;
+        //        }
+        //        else
+        //        {
+        //            DownCount = 300;
+        //        }
+        //    }
+        //}
+        if (UpCount > 0 && DownCount > 0)
         {
-            if (touch.phase == TouchPhase.Began)
+            if (Input.GetMouseButtonDown(0))
             {
-                // 現在のタッチ位置からRaycast
-                if( touch.position.x <= Screen.height/2 )
+                if (Input.mousePosition.y <= Screen.height / 2.0f)
                 {
-                    UpCount = 300;
+                    UpCount = 30;
                 }
                 else
                 {
-                    DownCount = 300;
+                    DownCount = 30;
                 }
             }
         }
+
+        AnimationUp();
+        AnimationDown();
 
        //if (AndroidInput.touchCountSecondary > 0)
        //{
@@ -76,17 +99,25 @@ public class PlayerControl : MonoBehaviour {
  
 
         //
+        transform.position = position;
         transform.position += speed;
 	}
 
-    void AnimationUp(float Time)
+    void AnimationUp()
     {
-
+        if(UpCount > 0 && DownCount > 0)
+        {
+            position.y = Mathf.Sin((float)UpCount/30.0f);
+            UpCount--;
+        }
     }
 
-    void AnimationDown(float Time)
+    void AnimationDown()
     {
-
+        if (UpCount >= 0 && DownCount >= 0)
+        {
+            position.y = Mathf.Cos((float)DownCount/30.0f);
+            DownCount--;
+        }
     }
-
 }
