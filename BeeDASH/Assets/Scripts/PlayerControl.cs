@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        UI_Heart.m_hp = this.m_hp;
 
 		if (!this.animation_now)
 		{
@@ -68,8 +69,9 @@ public class PlayerControl : MonoBehaviour {
         print("TestA");
         if(collision.gameObject.tag == "Rock")
         {
-            Application.LoadLevel("Title");
+            m_hp--;
         }
         print("Test");
+
     }
 }
