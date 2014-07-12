@@ -62,4 +62,11 @@ public class PlayerControl : MonoBehaviour {
 		animation_now = false;
     }
 
+    void OnCollisionEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Rock")
+        {
+            Application.LoadLevel("Game");
+        }
+    }
 }
