@@ -5,16 +5,15 @@ public class PlayerControl : MonoBehaviour {
 
     public int m_hp ;
 
-    private static int UpCount  ;
-    private static int DownCount;
+    private static int SinCount;
+    private static int s_MoveCount;
     private static Vector3 position;
 
 	// Use this for initialization
 	void Start () {
         QualitySettings.vSyncCount = 0; // VSyncをOFFにする
         Application.targetFrameRate = 60; // ターゲットフレームレートを60に設定
-        UpCount = 0;
-        DownCount = 0;
+        SinCount = 0;
         m_hp = 3;
 	}
 	
@@ -22,7 +21,7 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
         //移動
         float speedf = 1.0f / 60.0f;
-        Vector3 speed = new Vector3(speedf, 0.0f, 0.0f);
+        Vector3 speed = new Vector3(speedf, 0.0f, 0.0f);       
 
         position = transform.position;
 
@@ -49,17 +48,18 @@ public class PlayerControl : MonoBehaviour {
             {
                 if (Input.mousePosition.y <= Screen.height / 2.0f)
                 {
-                    UpCount = 30;
+                    s_MoveCount += 30;
                 }
                 else
                 {
-                    DownCount = 30;
+                    s_MoveCount -= 30;
                 }
             }
         }
+        
 
-        AnimationUp();
-        AnimationDown();
+        //AnimationUp();
+        //AnimationDown();
 
        //if (AndroidInput.touchCountSecondary > 0)
        //{
@@ -97,28 +97,38 @@ public class PlayerControl : MonoBehaviour {
        //    }
 
        //}
+        
+        if(s_MoveCount != 0)
+        {
+            SinCount += (s_MoveCount/60);
+            if(s_MoveCount < 0)
+            {
+                s_MoveCount--;
+            }
+            else
+            {
+                s_MoveCount++;
+            }
+        }
+
+        position.y = Mathf.Sin((float)SinCount/30.0f);
  
 
         //
-        transform.position = position;
-        transform.position += speed;
+        transform.position = position + speed;
 	}
 
     void AnimationUp()
     {
-        if(UpCount > 0)
         {
-            position.y = Mathf.Sin((float)UpCount/15.0f);
-            UpCount--;
+            position.y = Mathf.Sin((float)SinCount/60);
         }
     }
 
     void AnimationDown()
     {
-        if (DownCount > 0)
         {
-            position.y = (Mathf.Sin((float)DownCount/15.0f))*-1.0f;
-            DownCount--;
+            position.y = (Mathf.Sin((float)SinCount/60.0f))*-1.0f;
         }
     }
 }
