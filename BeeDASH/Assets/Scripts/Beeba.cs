@@ -34,10 +34,12 @@ public class Beeba : MonoBehaviour {
 		transform.position = pos;
 
 		if (Input.GetMouseButtonDown(0)) {
-			StartCoroutine("Jump");
-		}
-		if (Input.GetMouseButtonDown(1)) {
-			StartCoroutine("Dive");
+			if (Input.mousePosition.y > Screen.height / 2.0f) {
+				StartCoroutine("Jump");
+			}
+			else {
+				StartCoroutine("Dive");
+			}
 		}
 	}
 
