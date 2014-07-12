@@ -5,14 +5,18 @@ public class UI_Heart : MonoBehaviour {
     public static int m_hp;
     public int m_UICount;
 
+	public GameObject beebaObj;
+
+	private Beeba beeba;
+
 	// Use this for initialization
 	void Start () {
-        //m_pPlayer = GameObject.FindGameObjectWithTag("Player");
+		this.beeba = beebaObj.GetComponent<Beeba>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if(m_hp < m_UICount)
+	    if(beeba.life < m_UICount)
         {
             renderer.enabled = false;
         }
