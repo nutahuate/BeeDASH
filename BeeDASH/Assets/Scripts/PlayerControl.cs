@@ -42,9 +42,10 @@ public class PlayerControl : MonoBehaviour {
         //        }
         //    }
         //}
-        if (UpCount > 0 && DownCount > 0)
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            //if (UpCount < 0 && DownCount < 0)            
             {
                 if (Input.mousePosition.y <= Screen.height / 2.0f)
                 {
@@ -105,18 +106,18 @@ public class PlayerControl : MonoBehaviour {
 
     void AnimationUp()
     {
-        if(UpCount > 0 && DownCount > 0)
+        if(UpCount > 0)
         {
-            position.y = Mathf.Sin((float)UpCount/30.0f);
+            position.y = Mathf.Sin((float)UpCount/15.0f);
             UpCount--;
         }
     }
 
     void AnimationDown()
     {
-        if (UpCount >= 0 && DownCount >= 0)
+        if (DownCount > 0)
         {
-            position.y = Mathf.Cos((float)DownCount/30.0f);
+            position.y = (Mathf.Sin((float)DownCount/15.0f))*-1.0f;
             DownCount--;
         }
     }
