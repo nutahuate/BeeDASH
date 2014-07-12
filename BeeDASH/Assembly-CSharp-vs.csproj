@@ -49,7 +49,10 @@
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\FadeManager.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\Playmove.cs" />
+     <Compile Include="Assets\Scripts\Scaling.cs" />
      <Compile Include="Assets\Scripts\SingletonMonoBehaviour.cs" />
+     <Compile Include="Assets\Scripts\TitleMovement.cs" />
      <Compile Include="Assets\Scripts\TitleScenes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

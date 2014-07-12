@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour {
         QualitySettings.vSyncCount = 0; // VSyncをOFFにする
         Application.targetFrameRate = 60; // ターゲットフレームレートを60に設定
         m_hp = 3;
+        print("Start");
 	}
 	
 	// Update is called once per frame
@@ -62,4 +63,13 @@ public class PlayerControl : MonoBehaviour {
 		animation_now = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("TestA");
+        if(collision.gameObject.tag == "Rock")
+        {
+            Application.LoadLevel("Title");
+        }
+        print("Test");
+    }
 }
